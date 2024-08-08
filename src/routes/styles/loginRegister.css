@@ -1,0 +1,37 @@
+.Login, .Login > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.Login{
+    max-width: 20vw;
+    height: 60vh;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #aaa;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.Login input{
+    margin-bottom: 10px;
+    width: 90% !important;
+}
+
+.logo-login{
+    width: 90px;
+}
+
+p{
+    color: #555;
+    text-align: center;
+}
+
+a{
+    color: #555;
+    text-decoration: none;
+    text-align: center;
+}
