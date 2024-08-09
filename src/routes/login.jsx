@@ -1,40 +1,83 @@
+import axios from "axios";
+import bcrypt from "bcryptjs-react";
+import { useNavigate } from 'react-router-dom';
+
 import logo from "../assets/logo.png";
 
-import "./styles/loginRegister.css"
+import "./styles/loginRegister.css";
 
-async function onSubmit(){
 
-    let email = await document.querySelector("#input-login-email").value;
-    let password = await document.querySelector("#input-login-pass").value;
-    let re_password = await document.querySelector("#input-login-pass").value;
-
-    if (email)
-        if (
-            email.match("^([a-z]|[A-Z]|[0-9]|[@]|[!]|[$]|[#]|[.]|[-]){4,8}$") ||
-            password.match("^([a-z]|[A-Z]|[0-9]|[@]|[!]|[$]|[#]|[.]|[-]){4,8}$") ||
-            re_password.match("^([a-z]|[A-Z]|[0-9]|[@]|[!]|[$]|[#]|[.]|[-]){4,8}$")
-        ){
-            // CONTINUE
-        }else{
-            // STOP SQL INJECTIO OU CARACTERES NÃO AUTORIZADOS
-        }
-            
-            
-
-    return false;
-
-}
 
 async function change(){
 
-    console.log(1);
+    
     
 }
 
 
 export default function Login() {
+    const navigate = useNavigate();
+
+    async function onSubmit(){
+    
+        let regex = "^([a-z]|[A-Z]|[0-9]|[@]|[!]|[$]|[#]|[.]|[-]){4,8}$";
+    
+        let email = await document.querySelector("#input-login-email").value;
+        let password = await document.querySelector("#input-login-pass").value;
+    
+        let loged = await localStorage.getItem("user:login");
+
+        if (loged === "true") return false;
+
+        if (email)
+            if (
+                email.match(regex) ||
+                password.match(regex)
+            ){
+    
+                let res = await axios({
+                    method: "get",
+                    url: "http://localhost:3001/user/login",
+                    headers: {
+                        email: email
+                    }
+                })
+    
+                let isPassword = bcrypt.compareSync(password, res.data.user.password);
+                
+                if (res.data.auth){
+                    if (isPassword){
+    
+                        let user_infos = await axios({
+                            method: "get",
+                            url: "http://localhost:3001/user/verifytoken",
+                            headers: {
+                                token: res.data.user.token,
+                                token_login: res.data.user.token_login
+                            }
+                        })
+    
+                        await localStorage.setItem("user:infos", JSON.stringify(user_infos.data.data))                 
+                        await localStorage.setItem("user:login", "true");
+
+                        navigate("/")
+    
+                    }
+                }
+                
+            }else{
+                
+                // STOP SQL INJECTIO OU CARACTERES NÃO AUTORIZADOS
+            }
+                
+                
+    
+        return false;
+    
+    }
+
     return (
-        <div className="Login">
+        <div className="LogReg">
             
             <img className="logo-login" src={logo} alt="logo" />
 
@@ -59,14 +102,6 @@ export default function Login() {
                     onChange={change}
                     className="second"
                     id="input-login-pass"
-                />
-                <input
-                    type="password"
-                    maxLength="30"
-                    placeholder="repetir senha"
-                    onChange={change}
-                    className="second"
-                    id="input-login-repeat-pass"
                 />
             </div>
 

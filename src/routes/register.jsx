@@ -1,31 +1,61 @@
+import axios from "axios";
+import bcrypt from "bcryptjs-react";
+import { useNavigate } from 'react-router-dom';
+
 import logo from "../assets/logo.png";
 
-import "./styles/loginRegister.css"
+import "./styles/loginRegister.css";
 
-async function onSubmit(){
+export default function Register() {
+    const navigate = useNavigate();
 
-    let email = await document.querySelector("#input-login-email").value;
-
-    console.log(email);
+    async function onSubmit(){
     
-
-    console.log("testee");
+        let regex = "^([a-z]|[A-Z]|[0-9]|[@]|[!]|[$]|[#]|[.]|[-]){4,8}$";
     
-
-    return false;
-
-}
-
-async function change(){
-
-    console.log(1);
+        let email = await document.querySelector("#input-register-email").value;
+        let password = await document.querySelector("#input-register-pass").value;
+        let re_password = await document.querySelector("#input-register-repeat-pass").value;
     
-}
+        if (password !== re_password)
+            return false
 
+        if (email)
+            if (
+                email.match(regex) ||
+                password.match(regex) ||
+                re_password.match(regex)
+            ){
+                let salt = bcrypt.genSaltSync(11);
+                let hash = bcrypt.hashSync(password, salt);
 
-export default function Login() {
+                let res = await axios.post("http://localhost:3001/user/register", { email: email, password: hash } )
+                
+                
+                if (res.data.auth){
+    
+                    await localStorage.setItem("user:infos", JSON.stringify(res.data.data));
+                    await localStorage.setItem("user:login", "true");
+    
+                    navigate("/");
+                    
+                }else{
+                    console.log(res.data.message);                    
+                }
+                
+            }else{
+                
+                // STOP SQL INJECTIO OU CARACTERES NÃO AUTORIZADOS
+            }
+                
+                
+    
+        return false;
+    
+    }
+
     return (
-        <div className="Login">
+        <div className="LogReg">
             
             <img className="logo-login" src={logo} alt="logo" />
 
@@ -39,25 +69,22 @@ export default function Login() {
                     type="email"
                     maxLength="30"
                     placeholder="email@email.com"
-                    onChange={change}
                     className="primary"
-                    id="input-login-email"
+                    id="input-register-email"
                 />
                 <input
                     type="password"
                     maxLength="30"
                     placeholder="senha"
-                    onChange={change}
                     className="second"
-                    id="input-login-pass"
+                    id="input-register-pass"
                 />
                 <input
                     type="password"
                     maxLength="30"
                     placeholder="repetir senha"
-                    onChange={change}
                     className="second"
-                    id="input-login-repeat-pass"
+                    id="input-register-repeat-pass"
                 />
             </div>
 

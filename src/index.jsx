@@ -9,7 +9,7 @@ import "./index.css";
 
 import Root from "./routes/root";
 import Register from "./routes/register";
-import Login from "./routes/login";
+import Login from "./routes/login"
 
 import ErrorPage from "./error-page";
 

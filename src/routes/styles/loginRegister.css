@@ -1,4 +1,4 @@
-.Login, .Login > div{
+.LogReg, .LogReg > div{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -6,7 +6,7 @@
     width: 100%;
 }
 
-.Login{
+.LogReg{
     max-width: 20vw;
     height: 60vh;
     padding: 20px;
@@ -16,7 +16,7 @@
     justify-content: space-evenly;
 }
 
-.Login input{
+.LogReg input{
     margin-bottom: 10px;
     width: 90% !important;
 }
