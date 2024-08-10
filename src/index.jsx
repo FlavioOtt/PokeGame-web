@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import {
     createBrowserRouter,
-    RouterProvider,
+    RouterProvider
 } from "react-router-dom";
 
 import "./index.css";
@@ -10,6 +10,7 @@ import "./index.css";
 import Root from "./routes/root";
 import Register from "./routes/register";
 import Login from "./routes/login"
+import User from "./routes/user"
 
 import ErrorPage from "./error-page";
 
@@ -21,15 +22,23 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
+        path: "/user",
+        element: <User />,
+        errorElement: <ErrorPage />
+    },
+    {
+            
+        path: "/user/login",
+        element: <Login />,
+        errorElement: <ErrorPage />
+        
+    },
+    {
         path: "/user/register",
         element: <Register />,
         errorElement: <ErrorPage />
     },
-    {
-        path: "/user/login",
-        element: <Login />,
-        errorElement: <ErrorPage />
-    },
+    
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

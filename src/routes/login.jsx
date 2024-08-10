@@ -1,22 +1,21 @@
 import axios from "axios";
 import bcrypt from "bcryptjs-react";
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
 
 import logo from "../assets/logo.png";
 
 import "./styles/loginRegister.css";
 
-
-
-async function change(){
-
-    
-    
-}
-
-
 export default function Login() {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        let loged = localStorage.getItem("user:login");
+        
+        if (loged === "true")
+            navigate("/")
+    });
 
     async function onSubmit(){
     
@@ -91,7 +90,6 @@ export default function Login() {
                     type="email"
                     maxLength="30"
                     placeholder="email@email.com"
-                    onChange={change}
                     className="primary"
                     id="input-login-email"
                 />
@@ -99,7 +97,6 @@ export default function Login() {
                     type="password"
                     maxLength="30"
                     placeholder="senha"
-                    onChange={change}
                     className="second"
                     id="input-login-pass"
                 />

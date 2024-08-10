@@ -1,6 +1,7 @@
 import axios from "axios";
 import bcrypt from "bcryptjs-react";
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
 
 import logo from "../assets/logo.png";
 
@@ -8,6 +9,13 @@ import "./styles/loginRegister.css";
 
 export default function Register() {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        let loged = localStorage.getItem("user:login");
+        
+        if (loged === "true")
+            navigate("/")
+    });
 
     async function onSubmit(){
     
