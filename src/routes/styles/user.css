@@ -1,0 +1,68 @@
+.User{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: flex-start;
+}
+
+.Nav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 30vw;
+    background-color: #dddddd;
+    padding: 20px;
+}
+
+.nav-top{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-bottom{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.nav-title{
+    margin-bottom: 5px;
+}
+
+.Nav > div{
+    width: 100%;
+}
+
+
+.img-profile-user{
+    width: 20vw;
+}
+
+.link-div-icon{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 2.5px 5px;
+    border-radius: 2px;
+}
+
+.link-div-icon:hover{
+    background-color: rgb(255, 50, 50);
+}
+
+
+.btn-link,.btn-link:hover,.btn-link:active{
+    background-color: #00000000 !important;
+    outline: none !important;
+    border: none !important;
+}
+
+.icon-link{
+    width: 22px;
+}
+
+.Link{
+    background-color: #aaaaaa;
+}

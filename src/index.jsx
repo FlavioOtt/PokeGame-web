@@ -14,7 +14,6 @@ import User from "./routes/user"
 
 import ErrorPage from "./error-page";
 
-
 const router = createBrowserRouter([
     {
         path: "/",
