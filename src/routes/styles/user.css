@@ -10,7 +10,7 @@
     flex-direction: column;
     align-items: center;
     max-width: 30vw;
-    background-color: #dddddd;
+    background-color: #222;
     padding: 20px;
 }
 
@@ -52,6 +52,10 @@
     background-color: rgb(255, 50, 50);
 }
 
+
+.btn-link{
+    color: rgb(202, 202, 202);
+}
 
 .btn-link,.btn-link:hover,.btn-link:active{
     background-color: #00000000 !important;
